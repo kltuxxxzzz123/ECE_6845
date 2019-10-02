@@ -1,0 +1,54 @@
+% Homework 3
+% Problem 7: 
+% (Extra Credit) Modify filters, and synthesize elongated textures
+% similar to Figure 6 in van Wijk’s Spot Noise paper.
+% Ping-Ju Lin
+% Dates: 03/26/2019
+function Homework3_Problem7
+% Number of rows and columns;
+N = 256;
+% Generate gaussian
+w = randn(N);
+% Setting the gray color
+colormap(gray(256));
+% Apply FFT
+W = fft2(w);
+% Set the number of radius
+R = 10;
+% Set the sizes
+h = zeros(N,N);
+colormap(gray(255));
+% Make the picture looks like oval
+for m = 1:N
+    if (m > N/2)
+        m1 = m-1-N/2;
+    else
+        m1 = N/2-m-1;
+    end
+    for n =1:N
+     if (n>N/2)
+        n1 = n-1-N/2;
+     else
+        n1 = N/2-n-1;
+     end
+    dist = sqrt(m1^2 + n1^2);
+       if (dist < R)
+       h(m,n) = 1;
+       end
+    end   
+end  
+% Showing picture
+imagesc(h);
+% Pause the images
+pause;
+% Do FFT on h
+H = fft2(h);
+% Multiply H with W
+X = H.*W;   % * means cha chen .* means dian chen 
+% Do inverse fft on X
+x = ifft2(X);
+% Showing picture
+imagesc(real(x));
+% Pause the images
+pause; 
+end
