@@ -1,0 +1,43 @@
+% Homework 5 - geometric transform
+% Ping-Ju Lin
+% Dates: 04/16/2019
+function homework5
+
+% Set the columns and rows number
+N = 256;
+% Set the number of R
+R = 30;
+% Set the gtrans type
+type = 1:3;
+
+% Using the filter_gen
+h = filter_gen(N, R, type);
+% Randn the N x N
+w = randn(N);
+% Do fft on H
+H = fft2(h);
+% Do fft on W
+W = fft2(w);
+% Set the colormap
+colormap(gray(256));
+
+% Make alpha 2, 4, 8
+for alpha = [2, 4, 8]
+    % Make angle 1 to 4
+    for angle = 1:4
+        % Make angle change in every 45 degree
+        theta = (angle-1)*pi/4;
+        % input the gtrans
+        H1 = gtrans(H, alpha, theta);
+        % Conv on W and H1
+        Y = W.*H1;
+        % Do inverse fft on Y
+        y = ifft2(Y);
+        
+        % Show the picture
+        imagesc(real(y));
+        % Pause the picture
+        pause;
+    end
+end
+end
