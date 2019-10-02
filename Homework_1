@@ -1,0 +1,50 @@
+% Homework 1: Exrtcises in reading and writing image
+% Problem 1-2
+% Ping-Ju Lin
+% Dates: 01/29/2019
+function homework1_part1
+
+% Read an image call 'lena.dmp'
+f = imread('lena.bmp');
+
+% Setting a colormap: gray(256)
+colormap(gray(256));
+
+% Display the image f to the screen
+imagesc(f); 
+
+%Write a jpeg image to a file
+imwrite(f,'lena.jpg');
+
+pause;
+
+% Find the value in the (250,250)
+f(250,250);
+
+% Find the number of row and the number of columns
+[M,N] = size(f);
+
+% Printf M
+% M
+
+% Printf N
+% N
+
+% Create a blank image (all zero image)
+g = zeros(M,N);
+
+% Copy image f and invet then write to g
+for m = 1:M
+    for n = 1:N
+        g(m,n) = 255 - f(m,n);
+    end
+end 
+
+% Displat the image g
+imagesc(g);
+pause;
+
+% Write inverted image to a file
+imwrite(g, gray(256), 'lena_inverted.bmp');
+
+end
