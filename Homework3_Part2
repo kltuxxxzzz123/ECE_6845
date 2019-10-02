@@ -1,0 +1,25 @@
+% Homework 3
+% Problem 2: 
+% Apply FFT to the white Gaussian random field you generated in Part 1.
+% Ping-Ju Lin
+% Dates: 03/19/2019
+function Homework3_Problem2
+% Number of rows and columns;
+N = 256;
+% Generate gaussian
+W = randn(N);
+% Setting the gray color
+colormap(gray(256));
+% Showing picture
+imagesc(W);
+% Pause the images
+pause;
+% Apply FFT to the white Gaussian random field you generated in Part1
+w = fft2(W);
+% Real part of FFT part1
+imagesc(real(w)); 
+% Name the title
+title('Real part');
+% Pause the images
+pause;
+end
