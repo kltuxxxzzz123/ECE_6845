@@ -1,0 +1,17 @@
+% Homework 3
+% Problem 1:
+% Generate a 256x256 2-D (real) white Gaussian random field.
+% Ping-Ju Lin
+% Dates: 03/19/2019
+function Homework3_Problem1
+% Number of rows and columns;
+N = 256;
+% Generate gaussian
+W = randn(N);
+% Setting the gray color
+colormap(gray(256));
+% Showing picture
+imagesc(W);
+% Pause the images
+pause;
+end
