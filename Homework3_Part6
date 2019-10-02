@@ -1,0 +1,81 @@
+% Homework 3
+% Problem 6: 
+% Modify filters, and synthesize textures with soft-edges similar to 
+% Figure 5 in van Wijk’s Spot Noise paper.
+% Ping-Ju Lin
+% Dates: 03/26/2019
+function Homework3_Problem6
+% Number of Rows
+m=256;
+% Number of Columns
+n=256; 
+% Radius of circle
+r=30;   
+% Generate a white Gaussian random field
+w = randn(m,n);
+% Apply fft on w
+W = fft2(w);
+% Make circle in middle
+m1=-m/2:m/2-1;   
+n1=-n/2:n/2-1;
+% Create a circle
+[x,y]=meshgrid(m1,n1);
+% Calculate every ponits of distance to the middle point of circle 
+circle=x.^2+y.^2;  
+% Set the range
+circ_mask=zeros(m,n);  
+% Set every points larger circle equal to zero
+circ_mask(circle <= r^2) = 1;
+
+figure;
+% Set the colormap
+colormap(gray(255));
+% Shows picture
+imagesc(circ_mask);
+% Pause the images
+pause;
+% Apply 2-D FFT to the filter h        
+H = fft2(circ_mask);
+% Multiply H with W 
+X = H.*W;  
+% Apply inverse-FFT 
+x = ifft2(X);
+% Shows picture
+imagesc(real(x));
+% Pause the images
+pause;   
+% Apply Disk function
+c = fspecial('average',3);
+h2 = imfilter(circ_mask,c);
+% Shows picture
+imagesc(h2);
+% Pause the images
+pause;
+% Apply 2-D FFT to the filter h2        
+H = fft2(h2);
+% Multiply H with W 
+X = H.*W;  
+% Apply inverse-FFT 
+x = ifft2(X);
+% Shows picture
+imagesc(real(x));
+% Pause the images
+pause;   
+% Apply Gaussian function
+g = fspecial('gaussian',256,3);
+h3 = imfilter(circ_mask,g);
+% Shows picture
+imagesc(h3);
+% Pause the images
+pause;
+% Apply 2-D FFT to the filter h3       
+H = fft2(h3);
+% Multiply H with W 
+X = H.*W;  
+% Apply inverse-FFT 
+x = ifft2(X);
+% Shows picture
+imagesc(real(x));
+% Pause the images
+pause; 
+end
