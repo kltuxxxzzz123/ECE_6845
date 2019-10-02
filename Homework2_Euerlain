@@ -1,0 +1,65 @@
+% Homework 2: Generating and testing complex white Gaussian images.
+% Problem:4
+% Ping-Ju Lin
+% Dates: 02/20/2019
+function Homework2_Euerlain
+% Setting the color as gray
+colormap(gray(256));
+ 
+% Create images of disks using three distance measures
+N=256; % Number of rows and columns;
+R=50; % Number of radius
+ 
+fE = zeros(N); % create 256*256 blank image by Euerlain Eq
+
+for m = 1:N
+    % m1 is a variable having positive and negative values
+    if (m > N/2)
+        m1 = m-1-N;
+    else
+        m1 = m-1;
+    end
+    for n = 1:N
+        % n1 is a variable having positive and negative values
+        if (n > N/2) 
+            n1 = n-1-N;
+        else
+            n1 = n-1;
+        end
+        % Compute Eucledian distance from the origin
+        distE = sqrt(m1^2+n1^2);
+        % If pixel is within a disk of radius 50, then color it white
+        if (distE < R)
+            fE(m,n) = 255;
+        end
+    end
+end
+% Show the image after scaler (Euerlain)
+imagesc(fE);
+title('Euerlian');
+pause;
+
+% Apply 2-D FFT on Euerlain
+Z = fft2(fE);
+
+% Display real part of FFT
+imagesc(real(Z));
+title('real Euerlian');
+pause;
+
+% Display image part of FFT
+imagesc(imag(Z));
+title('image Euerlian');
+pause;
+
+% Display magnitude of FFT
+imagesc(abs(Z));
+title('absoulte Euerlian');
+pause;
+
+% Display phase angle of FFT
+imagesc(angle(Z));
+title('phase angle Euerlian');
+pause;
+
+end
