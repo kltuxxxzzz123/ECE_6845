@@ -1,0 +1,28 @@
+function h = filter_gen(N, R, type)
+
+h = zeros(N);
+
+for m = 1:N
+    if (m > N/2)
+        m1 = m-1-N;
+    else
+        m1 = m-1;
+    end
+    for n = 1:N
+        if (n > N/2)
+            n1 = n-1-N;
+        else
+            n1 = n-1;
+        end
+        if (type == 1)
+            dist = sqrt(m1^2 + n1^2);
+        elseif (type == 2)
+                dist = abs(m1) + abs(n1);
+        else
+                dist = max(abs(m1), abs(n1));   
+        end
+        if (dist < R)
+            h(m,n) = 255;
+        end
+    end
+end
