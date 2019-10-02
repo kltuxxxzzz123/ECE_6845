@@ -1,0 +1,64 @@
+% Homework 1: Generate a 256x256 image with a disk of three different dis
+% Problem 3-5
+% Ping-Ju Lin
+% Dates: 02/05/2019
+function Homework1_part2
+
+% Setting the color as gray
+colormap(gray(256));
+
+% Create images of disks using three distance measures
+N=256; % Number of rows and columns;
+R=50; % Number of radius
+
+fE = zeros(N); % create 256*256 blank image by Euerlain Eq
+f4 = zeros(N); % create 256*256 blank image by City-Block Eq (Diamond)
+f8 = zeros(N); % create 256*256 blank image by Checkerboard Eq
+
+for m = 1:N
+    % m1 is a variable having positive and negative values
+    if (m > N/2)
+        m1 = m-1-N;
+    else
+        m1 = m-1;
+    end
+    for n = 1:N
+        % n1 is a variable having positive and negative values
+        if (n > N/2) 
+            n1 = n-1-N;
+        else
+            n1 = n-1;
+        end
+        % Compute Eucledian distance from the origin
+        distE = sqrt(m1^2+n1^2);
+        % Calculate City-block distance from the origin
+        dist4 = abs(m1)+abs(n1);
+        % Calculate Checker-board distance from the origin
+        dist8 = max(abs(m1),abs(n1));
+        % If pixel is within a disk of radius 50, then color it white
+        if (distE < R)
+            fE(m,n) = 255;
+        end
+        % If pixel is within a disk of radius 50, then color it white
+        if (dist4 < R)
+            f4(m,n) = 255;
+        end
+        % If pixel is within a disk of radius 50, then color it white
+        if (dist8 < R)
+            f8(m,n) = 255;
+        end
+    end
+end
+% Show the image after scaler (Euerlain)
+imagesc(fE);
+% Make the pause here to let next picture can show.
+pause;
+% Show the image after scaler (City-Block)
+imagesc(f4);
+% Make the pause here to let next picture can show.
+pause;
+% Show the image after scaler (Checkerboard)
+imagesc(f8);
+% Make the pause here to let MATLAB don't shutdown.
+pause;
+end
