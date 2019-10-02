@@ -1,0 +1,50 @@
+% Homework 3
+% Problem 3: 
+% Apply FFT to each of the filters you generated in Assignment 1, and　
+% multiply it with the FFT of white Gaussian random filed you 
+% obtained in Part 2.
+% Ping-Ju Lin
+% Dates: 03/19/2019
+function Homework3_Problem3
+% Number of rows and columns;
+N = 256;
+% Set the Radius
+R = 50;
+% Set multiple type
+for type = 1:3
+% Generate gaussian
+W = randn(N);
+% Setting the gray color
+colormap(gray(256));
+% Showing picture
+imagesc(W);
+% Pause the images
+pause;
+% Apply FFT to the white Gaussian random field you generated in Part1
+w = fft2(W);
+% Real part of FFT part1
+imagesc(real(w)); 
+% Name the title
+title('real part');
+% Pause the images
+pause;
+% Import function filter_gen
+h = filter_gen(N, R ,type);
+% The filter_gen
+image(h);
+% Pause the images
+pause;
+% Apply FFT to the filter_gen
+H = fft2(h);
+% FFT of the filter_gen
+imagesc(log(abs(real(H))+1));
+% Pause the images
+pause;
+% Multiply H with w (feq. domain convolution)
+X = H.*w;
+% Real part of H multypy w
+image(real(X));
+% Pause the images
+pause;
+end
+end
