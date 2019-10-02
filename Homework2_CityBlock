@@ -1,0 +1,65 @@
+% Homework 2: Generating and testing complex white Gaussian images.
+% Problem:4
+% Ping-Ju Lin
+% Dates: 02/20/2019
+function Homework2_CityBlock
+
+% Setting the color as gray
+colormap(gray(256));
+ 
+% Create images of disks using three distance measures
+N=256; % Number of rows and columns;
+R=50; % Number of radius
+ 
+f4 = zeros(N); % create 256*256 blank image by City-Block Eq (Diamond)
+for m = 1:N
+    % m1 is a variable having positive and negative values
+    if (m > N/2)
+        m1 = m-1-N;
+    else
+        m1 = m-1;
+    end
+    for n = 1:N
+        % n1 is a variable having positive and negative values
+        if (n > N/2) 
+            n1 = n-1-N;
+        else
+            n1 = n-1;
+        end
+        % Calculate City-block distance from the origin
+        dist4 = abs(m1)+abs(n1);
+        % If pixel is within a disk of radius 50, then color it white
+        if (dist4 < R)
+            f4(m,n) = 255;
+        end
+    end
+end
+% Show the image after scaler (City-Block)
+imagesc(f4);
+title('City-Block');
+pause;
+
+% Apply 2-D FFT on City-Block
+Z = fft2(f4);
+
+% Display real part of FFT
+imagesc(real(Z));
+title('real City-Block');
+pause;
+
+% Display image part of FFT
+imagesc(imag(Z));
+title('image City-Block');
+pause;
+
+% Display magnitude of FFT
+imagesc(abs(Z));
+title('absoulte City-Block');
+pause;
+
+% Display phase angle of FFT
+imagesc(angle(Z));
+title('phase angle City-Block');
+pause;
+
+end
