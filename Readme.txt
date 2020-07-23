@@ -4,4 +4,4 @@ Image processing
 
 The George Washington University grad level class
 
-You can find all the homework code here.
+You can find all the homework's code here.
